@@ -35,6 +35,7 @@ public class CalculatePower {
         }
 
         return result;
+        // Time complexity O(log(b))
     }
 
     // recursion
