@@ -2,13 +2,15 @@ package random;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Questions {
     static void main() {
-        int [] arr = {3,4,5,2};
+        int [] arr = {1,2,3,1,2,3};
+        int [] nums = {99,99};
 //        System.out.println(maxProduct(arr));
 
-        System.out.println(hammingDistance(1, 4));
+        System.out.println(containsNearbyDuplicate(nums, 2));
     }
     public static int xorOperation(int n, int start) {
         int result = 0;
@@ -109,5 +111,68 @@ public class Questions {
             i++;
         }
         return count;
+    }
+    // Happy number from leetcode::
+
+    public static boolean isHappy(int n){
+        if(n<0){
+            return false;
+        }
+        HashSet<Integer> set = new HashSet<>();
+        while((n != 1) && !set.contains(n)){
+            set.add(n);
+            n = happy(n);
+        }
+
+        return n==1;
+    }
+    public static int happy(int n){
+        int sum = 0;
+        while (n>0){
+            int rem = n%10;
+            sum+=rem*rem;
+            n/=10;
+        }
+        return sum;
+    }
+    public static int findMaxConsecutiveOnes(int [] nums){
+        int count = 0;
+        int reset = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i] == 1){
+                reset++;
+                if(count<reset){
+                    count++;
+                }
+            }else {
+                reset = 0;
+            }
+        }
+        return count;
+    }
+
+    public static boolean containsNearbyDuplicateBruteForce(int[] nums, int k) {
+        for (int i = 0; i < nums.length; i++) {
+            // Look ahead up to k elements, but don't go past the end of the array
+            for (int j = i + 1; j <= i + k && j < nums.length; j++) {
+                if (nums[i] == nums[j]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashSet<Integer> window = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (i > k) {
+                window.remove(nums[i - k - 1]);
+            }
+            if (!window.add(nums[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 }
