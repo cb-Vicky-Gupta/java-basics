@@ -7,10 +7,10 @@ import java.util.HashSet;
 public class Questions {
     static void main() {
         int [] arr = {1,2,3,1,2,3};
-        int [] nums = {99,99};
+        int [] nums = new int[]{0,0,1,1,1,2,2,3,3,4};
 //        System.out.println(maxProduct(arr));
 
-        System.out.println(containsNearbyDuplicate(nums, 2));
+        System.out.println(removeHash("ad#c"));
     }
     public static int xorOperation(int n, int start) {
         int result = 0;
@@ -175,4 +175,62 @@ public class Questions {
         }
         return false;
     }
+
+//        public static int[] twoSum(int[] numbers, int target) {
+//            int left = 0, right = numbers.length-1;
+//            int [] result = new int[2];
+//            while(left<right){
+//                if(numbers[left] + numbers[right] == k){
+//                    result[0] = left+1;
+//                    result[1] = right+1;
+//                }else if(numbers[left] + numbers[right] < k){
+//
+//                }
+//            }
+//            return result;
+//        }
+
+//    Remove Duplicates from Sorted Array
+    public static int removeDuplicates(int[] nums) {
+        if (nums.length == 0) return 0;
+        int slow = 0;
+        for (int fast = 1; fast < nums.length; fast++) {
+            if (nums[slow] != nums[fast]) {
+                slow++;
+                nums[slow] = nums[fast];
+            }
+        }
+        return slow + 1;
+    }
+    // inter section
+    public static  int[] intersect(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i : nums1){
+            map.put(i, map.getOrDefault(i,0)+1);
+        }
+        for(int i : nums2){
+            if(map.containsKey(i) && map.get(i)> 0){
+                list.add(i);
+                map.put(i, map.get(i)-1);
+            }
+        }
+        return list.stream().mapToInt(Integer::intValue).toArray();
+    }
+    public static String removeHash(String s){
+        StringBuilder sb = new StringBuilder(s);
+        for (int i = sb.length()-1; i>=0; i--) {
+
+            if(sb.charAt(i) == '#'){
+                sb.deleteCharAt(i);
+
+                if(i > 0){
+                    sb.deleteCharAt(i-1);
+                    i--;
+                }
+            }
+        }
+        return sb.toString();
+    }
 }
+
