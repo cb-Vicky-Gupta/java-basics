@@ -10,7 +10,7 @@ public class Questions {
         int [] nums = new int[]{0,0,1,1,1,2,2,3,3,4};
 //        System.out.println(maxProduct(arr));
 
-        System.out.println(removeHash("ad#c"));
+        System.out.println(divisorSubstrings(430043, 2));
     }
     public static int xorOperation(int n, int start) {
         int result = 0;
@@ -232,5 +232,25 @@ public class Questions {
         }
         return sb.toString();
     }
+    public static int divisorSubstrings(int num, int k) {
+        String str = String.valueOf(num);
+        int count = 0;
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < k; i++) {
+            s.append(str.charAt(i));
+        }
+        for (int i = k; i <= str.length(); i++) {
+            int deno = Integer.parseInt(s.toString());
+            if(deno != 0 && num%deno == 0){
+                count++;
+            }
+            if (i < str.length()) {
+                s.deleteCharAt(0);
+                s.append(str.charAt(i));
+            }
+        }
+        return count;
+    }
+
 }
 
