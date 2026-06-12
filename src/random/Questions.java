@@ -6,11 +6,11 @@ import java.util.HashSet;
 
 public class Questions {
     static void main() {
-        int [] arr = {1,2,3,1,2,3};
+        int [] arr = {11,13,17,23,29,31,7,5,2,3};
         int [] nums = new int[]{0,0,1,1,1,2,2,3,3,4};
 //        System.out.println(maxProduct(arr));
-
-        System.out.println(divisorSubstrings(430043, 2));
+       int k = 3, threshold = 5;
+        System.out.println(numOfSubarrays(arr, k , threshold));
     }
     public static int xorOperation(int n, int start) {
         int result = 0;
@@ -249,6 +249,24 @@ public class Questions {
                 s.append(str.charAt(i));
             }
         }
+        return count;
+    }
+    public static int numOfSubarrays(int[] arr, int k, int threshold) {
+        int count = 0;
+        int window = 0;
+        for (int i = 0; i < k; i++) {
+            window+=arr[i];
+        }
+        if((window/k) >= threshold){
+            count++;
+        }
+        for (int i = k; i < arr.length; i++) {
+            window = window + arr[i] - arr[i-k];
+            if((window/k) >= threshold){
+                count++;
+            }
+        }
+
         return count;
     }
 
