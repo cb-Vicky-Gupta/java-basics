@@ -7,13 +7,13 @@ import java.util.List;
 
 public class ArrayNew {
     static void main() {
-        int[] arr = {2,4,9,3};
+        int[] arr = {1,2,3,4};
         int k =-2;
         int [] arrN = decrypt(arr, k);
         for (int i = 0; i < arrN.length; i++) {
 //            System.out.print(arrN[i] + " ");
         }
-        System.out.println(countGoodSubstrings("owuxoelszb"));
+        System.out.println(maxProduct(arr));
 
     }
     public static int maxVowels(String s, int k) {
@@ -103,4 +103,49 @@ public class ArrayNew {
 
         return count;
     }
+    public static int maxProduct(int [] nums){
+        if(nums.length <=2) return -1;
+        if(nums.length == 3) return nums[0]*nums[1]*nums[2];
+        int max1 = Integer.MIN_VALUE, max2 =Integer.MIN_VALUE, max3 = Integer.MIN_VALUE;
+        int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            if(max1 < nums[i]){
+                max3 = max2;
+                max2 = max1;
+                max1= nums[i];
+            } else if (max2<nums[i]) {
+                max3 = max2;
+                max2= nums[i];
+            }else if (max3 <nums[i]){
+                max3=nums[i];
+            }
+
+            if(min1>nums[i]){
+                min2 = min1;
+                min1= nums[i];
+            }else if (min2>nums[i]){
+                min2= nums[i];
+            }
+        }
+        System.out.print(max1 + " " + max2 + " " + max3 + " " + min1 + " " + min2 + " " );
+        return Math.max(max1*max2*max3 , max1*min1*min2);
+    }
+
+        public static int minSubArrayLen(int target, int[] nums) {
+            int left = 0;
+            int currentSum = 0;
+            int minLength = Integer.MAX_VALUE;
+
+            for (int right = 0; right < nums.length; right++) {
+                currentSum += nums[right];
+
+                while (currentSum >= target) {
+                    minLength = Math.min(minLength, right - left + 1);
+                    currentSum -= nums[left];
+                    left++;
+                }
+            }
+
+            return minLength == Integer.MAX_VALUE ? 0 : minLength;
+        }
 }
