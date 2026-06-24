@@ -13,7 +13,7 @@ public class ArrayNew {
         for (int i = 0; i < arrN.length; i++) {
 //            System.out.print(arrN[i] + " ");
         }
-        System.out.println(reverseSubString("abcd", 'z'));
+        System.out.println(rotateString("abcde", "bcdea"));
 
     }
 
@@ -183,6 +183,23 @@ public class ArrayNew {
         String reversedMiddle = String.valueOf(new StringBuilder(result).reverse());
         result = reversedMiddle+ word.substring(index+1, word.length());
         return index == -1 ? word : result;
+    }
+    public static boolean rotateString(String s, String goal){
+        for (int i = 0; i < s.length(); i++) {
+            if(s.equals(goal)){
+                return true;
+            }else{
+                char ch = s.charAt(s.length()-1);
+                StringBuilder sb = new StringBuilder(s);
+                sb.deleteCharAt(s.length()-1);
+                s = ch + sb.toString();
+                if(s.equals(goal)){
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
 }
