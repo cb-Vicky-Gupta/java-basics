@@ -278,8 +278,8 @@ public class ArrayNew {
 //        System.out.println(mat[n/2][n/2]);
         return n%2 == 0 ? sum : sum-mat[n/2][n/2];
     }
-    public static boolean isToeplitzMatrix(int[][] matrix) {
-
-    }
+//    public static boolean isToeplitzMatrix(int[][] matrix) {
+//
+//    }
 
 }
