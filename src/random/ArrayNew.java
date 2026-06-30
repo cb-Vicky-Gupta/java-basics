@@ -13,7 +13,16 @@ public class ArrayNew {
         for (int i = 0; i < arrN.length; i++) {
 //            System.out.print(arrN[i] + " ");
         }
-        System.out.println(rotateString("abcde", "bcdea"));
+        int [][] mat = {{1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1}};
+//        int [][] result = flipAndInvertImage(mat);
+//        for (int i = 0; i < result.length; i++) {
+//            for (int j = 0; j < result[i].length; j++) {
+//                System.out.print(result[i][j] + " ");
+//            }
+//
+//        }
+        System.out.println(diagonalSum(mat));
+//        System.out.println(defangIPaddr("255.100.50.0"));
 
     }
 
@@ -200,6 +209,77 @@ public class ArrayNew {
         }
 
         return false;
+    }
+    public static String defangIPaddr(String address) {
+        String result = "";
+        for(int i = 0; i<address.length(); i++){
+            if(address.charAt(i) != '.'){
+                result+= address.charAt(i);
+            }else{
+                result+="[.]";
+            }
+        }
+        return result;
+    }
+    public static int[][] transpose(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) return matrix;
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int [][] transposeMatrix = new int[cols][rows];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                transposeMatrix[j][i] = matrix[i][j];
+            }
+        }
+        return transposeMatrix;
+    }
+    public static int[][] flipAndInvertImage(int[][] image) {
+        for (int i = 0; i < image.length; i++) {
+            image[i] = reverseandFlip(image[i]);
+        }
+        for (int i = 0; i < image.length; i++) {
+            for (int j = 0; j < image[i].length; j++) {
+                if(image[i][j] ==0){
+                    image[i][j] = 1;
+                }else{
+                    image[i][j] = 0;
+                }
+            }
+        }
+        return image;
+    }
+    public static int[] reverseandFlip(int[] arr){
+       int start = 0, end = arr.length-1;
+       while(end>start){
+           int temp = arr[start];
+           arr[start] = arr[end];
+           arr[end] = temp;
+           start++;
+           end--;
+       }
+       return arr;
+    }
+    public static int diagonalSum(int[][] mat) {
+        int n = mat.length;
+        int sum = 0;
+        for (int i = 0; i <n; i++) {
+            for (int j = 0; j < n; j++) {
+                if(i==j){
+//                    System.out.println(mat[i][j]);
+                    sum+=mat[i][j];
+                }
+                if(j == n-i-1){
+                    System.out.println(mat[i][n-1-i]);
+                    sum+=mat[i][n-1-i];
+                }
+            }
+        }
+//        System.out.println(sum);
+//        System.out.println(mat[n/2][n/2]);
+        return n%2 == 0 ? sum : sum-mat[n/2][n/2];
+    }
+    public static boolean isToeplitzMatrix(int[][] matrix) {
+
     }
 
 }
