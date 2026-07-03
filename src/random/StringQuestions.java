@@ -1,8 +1,13 @@
 package random;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class StringQuestions {
     static void main() {
-        System.out.println(longestPalindrome("racecartcs"));
+        System.out.println(longestPalindromeCanMade("abccccdd"));
     }
     public static Boolean checkPalindrome(String s){
         int left = 0, right = s.length()-1;
@@ -72,4 +77,23 @@ public class StringQuestions {
         }
         return right-left-1;
     }
+    public static int longestPalindromeCanMade(String s){
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+        }
+        AtomicInteger length = new AtomicInteger(0);
+        AtomicBoolean hasOdd = new AtomicBoolean(false);
+        final int[] oddLen = {0};
+        map.forEach((key, value) -> {
+            if (value % 2 == 0) {
+                length.addAndGet(value);
+            } else {
+                length.addAndGet(value - 1);
+                hasOdd.set(true);
+            }
+        });
+        return length.get() + (hasOdd.get() ? 1 : 0);
+    }
 }
+
