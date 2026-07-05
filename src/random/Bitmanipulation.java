@@ -1,8 +1,10 @@
 package random;
 
+import java.util.HashMap;
+
 public class Bitmanipulation {
     static void main() {
-        System.out.println(complement(11));
+        System.out.println(rangeBitwise(1,2147483647));
     }
     public static int complement(int n){
         int num = 0, power = 1;
@@ -34,4 +36,31 @@ public class Bitmanipulation {
         }
         return true;
     }
+    public static int rangeBitwise(int left, int right) {
+        int shiftCount = 0;
+        while (left < right) {
+            left >>= 1;
+            right >>= 1;
+            shiftCount++;
+        }
+        return left << shiftCount;
+    }
+public static  String toHex(int num) {
+    if (num == 0) {
+        return "0";
+    }
+    char[] hexChars = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+    StringBuilder result = new StringBuilder();
+//    while (num>0){
+//        int rem = num%16;
+//        result.insert(0, hexChars[rem]);
+//        num/=16;
+//    }
+    for (int i = 0; i < 8 && num != 0; i++) {
+        int rem = num & 15;
+        result.insert(0, hexChars[rem]);
+        num >>= 4;
+    }
+    return result.toString();
+}
 }
