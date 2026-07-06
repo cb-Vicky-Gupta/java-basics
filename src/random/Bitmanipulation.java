@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Bitmanipulation {
     static void main() {
-        System.out.println(rangeBitwise(1,2147483647));
+        System.out.println(reverseBits(43261596));
     }
     public static int complement(int n){
         int num = 0, power = 1;
@@ -45,22 +45,34 @@ public class Bitmanipulation {
         }
         return left << shiftCount;
     }
-public static  String toHex(int num) {
-    if (num == 0) {
-        return "0";
+    public static  String toHex(int num) {
+        if (num == 0) {
+            return "0";
+        }
+        char[] hexChars = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+        StringBuilder result = new StringBuilder();
+    //    while (num>0){
+    //        int rem = num%16;
+    //        result.insert(0, hexChars[rem]);
+    //        num/=16;
+    //    }
+        for (int i = 0; i < 8 && num != 0; i++) {
+            int rem = num & 15;
+            result.insert(0, hexChars[rem]);
+            num >>= 4;
+        }
+        return result.toString();
     }
-    char[] hexChars = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
-    StringBuilder result = new StringBuilder();
-//    while (num>0){
-//        int rem = num%16;
-//        result.insert(0, hexChars[rem]);
-//        num/=16;
-//    }
-    for (int i = 0; i < 8 && num != 0; i++) {
-        int rem = num & 15;
-        result.insert(0, hexChars[rem]);
-        num >>= 4;
+    public static int reverseBits(int n){
+        int result = 0;
+        long coeff = (long) Math.pow(2,31);
+        for (int i = 31; i > 0; i--) {
+            int rem = n&1;
+            result+= rem * coeff;
+
+            n>>=1;
+            coeff/=2;
+        }
+        return result;
     }
-    return result.toString();
-}
 }
