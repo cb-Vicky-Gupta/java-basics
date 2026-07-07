@@ -4,7 +4,13 @@ import java.util.HashMap;
 
 public class Bitmanipulation {
     static void main() {
-        System.out.println(reverseBits(43261596));
+//        System.out.println(reverseBits(43261596));
+        int [] arr = {6,2,7,3};
+        int first = 4;
+        int[] ans = decode(arr, first);
+        for (int i = 0; i <ans.length; i++) {
+            System.out.print(ans[i] + " ");
+        }
     }
     public static int complement(int n){
         int num = 0, power = 1;
@@ -72,6 +78,15 @@ public class Bitmanipulation {
 
             n>>=1;
             coeff/=2;
+        }
+        return result;
+    }
+    public static int[] decode(int[] encoded, int first) {
+        int [] result = new int[encoded.length+1];
+        result[0] = first;
+        for (int i = 0; i < encoded.length; i++) {
+            int number = result[i]^encoded[i];
+            result[i+1] = number;
         }
         return result;
     }
