@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Bitmanipulation {
     static void main() {
-        System.out.println(bitwiseComplement(10));
+        System.out.println(checkOnesSegment("111"));
 //        int [] arr = {6,2,7,3};
 //        int first = 4;
 //        int[] ans = decode(arr, first);
@@ -107,5 +107,16 @@ public class Bitmanipulation {
         }
         return result;
     }
-
+    public static boolean checkOnesSegment(String s) {
+        int onFlag = 0;
+        if(s.charAt(0) == '1') onFlag++;
+        int count = 0;
+        for (int i = 1; i < s.length(); i++) {
+            if(s.charAt(i) != s.charAt(i-1)){
+                count++;
+            }
+            if(s.charAt(i) == '1') onFlag++;
+        }
+        return onFlag >0 && count<2;
+    }
 }
