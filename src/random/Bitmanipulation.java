@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 public class Bitmanipulation {
     static void main() {
-//        System.out.println(reverseBits(43261596));
-        int [] arr = {6,2,7,3};
-        int first = 4;
-        int[] ans = decode(arr, first);
-        for (int i = 0; i <ans.length; i++) {
-            System.out.print(ans[i] + " ");
-        }
+        System.out.println(bitwiseComplement(10));
+//        int [] arr = {6,2,7,3};
+//        int first = 4;
+//        int[] ans = decode(arr, first);
+//        for (int i = 0; i <ans.length; i++) {
+//            System.out.print(ans[i] + " ");
+//        }
     }
     public static int complement(int n){
         int num = 0, power = 1;
@@ -90,4 +90,22 @@ public class Bitmanipulation {
         }
         return result;
     }
+    public static int bitwiseComplement(int n) {
+        if(n ==0) return 1;
+        int result = 0;
+        int coeff = 1;
+        while (n>0){
+            int rem = (n&1);
+            if(rem ==1){
+                rem = 0;
+            }else{
+                rem = 1;
+            }
+            result+=rem*coeff;
+            n>>=1;
+            coeff*=2;
+        }
+        return result;
+    }
+
 }

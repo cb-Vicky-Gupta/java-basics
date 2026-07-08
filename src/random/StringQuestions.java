@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class StringQuestions {
     static void main() {
-        System.out.println(longestPalindromeCanMade("abccccdd"));
+        System.out.println(findTheDifference("", "y"));
     }
     public static Boolean checkPalindrome(String s){
         int left = 0, right = s.length()-1;
@@ -94,6 +94,23 @@ public class StringQuestions {
             }
         });
         return length.get() + (hasOdd.get() ? 1 : 0);
+    }
+    public static char findTheDifference(String s, String t) {
+       int [] alphaArray  = new int[26];
+       int ans = -1;
+        for (int i = 0; i < s.length(); i++) {
+            int getIndex = s.charAt(i)-'a';
+            alphaArray[getIndex] = alphaArray[getIndex]+1;
+        }
+        for (int i = 0; i < t.length(); i++) {
+            int getIndex = t.charAt(i)-'a';
+            alphaArray[getIndex] = alphaArray[getIndex]-1;
+            if(alphaArray[getIndex] == -1){
+                ans = getIndex;
+            }
+        }
+       return  (char) ('a' + ans);
+
     }
 }
 
