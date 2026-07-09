@@ -3,14 +3,15 @@ package random;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class Questions {
     static void main() {
-        int [] arr = {11,13,17,23,29,31,7,5,2,3};
-        int [] nums = new int[]{0,0,1,1,1,2,2,3,3,4};
-//        System.out.println(maxProduct(arr));
-       int k = 3, threshold = 5;
-        System.out.println(numOfSubarrays(arr, k , threshold));
+        int [] arr = {1,2,3,4};
+//        int [] nums = new int[]{0,0,1,1,1,2,2,3,3,4};
+////        System.out.println(maxProduct(arr));
+//       int k = 3, threshold = 5;
+        System.out.println(divideArray(arr));
     }
     public static int xorOperation(int n, int start) {
         int result = 0;
@@ -268,6 +269,17 @@ public class Questions {
         }
 
         return count;
+    }
+    public static boolean divideArray(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num,0)+1);
+        }
+        for (Integer value : map.values()) {
+//            System.out.println("Value: " + value);
+            if(value% 2 != 0) return false;
+        }
+        return true;
     }
 
 }

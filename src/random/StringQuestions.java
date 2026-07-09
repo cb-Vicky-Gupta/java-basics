@@ -1,13 +1,17 @@
 package random;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class StringQuestions {
+    static String allowed = "cad";
+    static String [] words = {"cc","acd","b","ba","bac","bad","ac","d"};
     static void main() {
-        System.out.println(findTheDifference("", "y"));
+        System.out.println(countConsistentStrings(allowed, words));
     }
     public static Boolean checkPalindrome(String s){
         int left = 0, right = s.length()-1;
@@ -112,5 +116,27 @@ public class StringQuestions {
        return  (char) ('a' + ans);
 
     }
+    public static int countConsistentStrings(String allowed, String[] words) {
+        List<Character> list = new ArrayList<>();
+        for (int i = 0; i<allowed.length(); i++) {
+            list.add(allowed.charAt(i));
+        }
+        int count = 0;
+        for (int i = 0; i < words.length; i++) {
+            if(checkString(words[i], list)){
+                count++;
+            }
+        }
+        return count;
+    }
+    public static Boolean checkString(String word, List list){
+        for (int i = 0; i < word.length(); i++) {
+            if(!list.contains(word.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
 
