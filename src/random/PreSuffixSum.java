@@ -148,4 +148,6 @@ public class PreSuffixSum {
         return result;
     }
 
+    public static class Factors {
+    }
 }
